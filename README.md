@@ -8,6 +8,9 @@ This software is designed **only** for testing purposes and POC. It contains no 
 `Usage of RouterPWN for attacking targets without prior mutual consent is illegal. It is the responsibility of end user to obey all applicable local, state and federal laws.
 Developer assumes no liability and are not responsible for any misuse or damage caused by this program
 `
+
+I'm not a developer as you can see inside my code. I developed this tools as a PoC for a friend and to improve a little bit my developer skills.
+
 ### Description:
 This tool takes advantage of known vulnerabilities that allow you to recover the admin password for various routers and modems that expose a web administration interface. 
 The tool also performs tests to check whether it is set to default password.
