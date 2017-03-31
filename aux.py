@@ -57,10 +57,8 @@ def is_netgear (header):
 		model = re.search('Basic realm="(.+?)"', realm).group(1)
 	except:
 		try:
-			model = re.search('Digest realm="(.+?)Authentication"', realm).group(1)
-			with open('minchia', 'a') as out_temp:
-				out_temp.writelines('\n' + header)
-			out_temp.close()
+			realm = (header['WWW-Authenticate'])
+			model = re.search('Digest realm="(.+?) Authentication', realm).group(1)
 		except:
 			try:
 				realm = (header['WWW-Authenticate'])
