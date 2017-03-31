@@ -1,13 +1,13 @@
 # routerPWN
 
-A tool for exploiting home routers. Needs python 3
+A tool for exploiting home routers. Needs python 3. Released under GPL v3 license.
 
 ### Disclaimer:
 This software is designed **only** for testing purposes and POC. It contains no 0-day, only vulnerabilities/exploits  that have been submitted to vendors and fixed.
 
-Usage of RouterPWN for attacking targets without prior mutual consent is illegal. It is the responsibility of end user to obey all applicable local, state and federal laws.
+`Usage of RouterPWN for attacking targets without prior mutual consent is illegal. It is the responsibility of end user to obey all applicable local, state and federal laws.
 Developer assumes no liability and are not responsible for any misuse or damage caused by this program
-
+`
 ### Description:
 This tool takes advantage of known vulnerabilities that allow you to recover the admin password for various routers and modems that expose a web administration interface. 
 The tool also performs tests to check whether it is set to default password.
