@@ -4,21 +4,23 @@ import aux
 import socket
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 from bs4 import BeautifulSoup
 import sys
 import exploit
 
-"""definition of the options object"""
+# definition of the options object
 class Options:
-	single_ip=True
-	ip=''
-	list_mode=False
-	list_file=''
-	o_file=False
-	o_file_name=''
+	single_ip = True
+	ip = ''
+	list_mode = False
+	list_file = ''
+	o_file = False
+	o_file_name = ''
 
-"""definition of the router object """
+
+# definition of the router object
 class Router:
 	brand = ''
 	model = ''
@@ -37,7 +39,7 @@ class Router:
 	found = False
 	__is_linksys = False
 	__ssl = False
-
+	# This function check if the given port is or not open
 	def __is_open (self, port):
 		s = socket.socket()
 		try:
@@ -53,8 +55,8 @@ class Router:
 			s.close()
 			return 0
 
-#Check if there is a running a webserver and if it is know
-	def __check_webserver(self,opt):
+	# Check if there is a running a webserver and if it is know
+	def __check_webserver (self, opt):
 		for t in self.__default_ports:
 			if self.__is_open(t) == 1:
 				self.open_ports.append(t)
@@ -63,6 +65,7 @@ class Router:
 			sys.exit(100)
 		aux.ex_print('positive', '\t[+] Found open ports: ' + str(self.open_ports), '1')
 		protocol = ["http://", "https://"]
+		# Try every combination of port/protocol to find an usable web server
 		for port in self.open_ports:
 			for prot in protocol:
 				try:
@@ -79,8 +82,8 @@ class Router:
 					# try to detect if is a netgear, a dlink...
 					aux.ex_print('action', '[*] Try to identify brand/model...', 1)
 					if aux.is_netgear(self.header) != '':
-						self.netgear=True
-						self.model=aux.is_netgear(self.header)
+						self.netgear = True
+						self.model = aux.is_netgear(self.header)
 						self.port = port
 						aux.ex_print('positive', '\t[+] Found Brand/Model : ' + self.model, '1')
 						aux.ex_print('action', '[*] Check default creds ...', '1')
@@ -91,22 +94,16 @@ class Router:
 							exploit.exploit_act(self)
 						return 1
 					elif aux.is_dlink(self.body):
-						self.dlink=True
-						self.model=aux.model
+						self.dlink = True
+						self.model = aux.model
 						return 1
 		return 0
 
-
-
-
-	"""When initialized check for brand/model"""
-	def __init__(self,opt):
-		self.ip=opt.ip
-		self.open_ports =[]
-		aux.ex_print('info','\nTesting: '+self.ip,1)
+	# When the router object is initialized we check for brand/model
+	def __init__ (self, opt):
+		self.ip = opt.ip
+		self.open_ports = []
+		aux.ex_print('info', '\nTesting: ' + self.ip, 1)
 		aux.ex_print('action', '[*] Try to detect web server on default ports...', 1)
 		if self.__check_webserver(opt) == 0:
 			aux.ex_print('error', '\t[-] Brand/Model not found! ', '1')
-
-
-

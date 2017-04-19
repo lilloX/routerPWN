@@ -4,9 +4,10 @@ from colorama import Fore, Style
 import os
 import re
 
-"""Function ex_print prints a colorized text based on the message type"""
+"""Aux module"""
 
 
+# Function ex_print prints a colorized text based on the message type
 def ex_print (type, msg, ret):
 	colorama.init()
 	# Define color and style constants
@@ -48,9 +49,7 @@ def banner (version):
 	ex_print('reset', '', 1)
 
 
-"""Functions to detect the router brand/model"""
-
-
+# Check if is a Netgear router
 def is_netgear (header):
 	try:
 		realm = (header['WWW-Authenticate'])
