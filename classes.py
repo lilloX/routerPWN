@@ -62,7 +62,7 @@ class Router:
 				self.open_ports.append(t)
 		if not len(self.open_ports) > 0:
 			aux.ex_print('error', '\t[-] Web server not found', '1')
-			sys.exit(100)
+			return 1
 		aux.ex_print('positive', '\t[+] Found open ports: ' + str(self.open_ports), '1')
 		protocol = ["http://", "https://"]
 		# Try every combination of port/protocol to find an usable web server
