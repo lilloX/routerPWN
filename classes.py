@@ -72,7 +72,7 @@ class Router:
 			for prot in protocol:
 				try:
 					url_to_test = prot + self.ip + ':' + port
-					r = requests.get(url_to_test, verify = False, timeout = 5)
+					r = requests.get(url_to_test, verify = False, timeout = 3)
 				except requests.exceptions.RequestException as e:
 					aux.ex_print('error', 'DEBUG: Error in request', 1)
 					pass
@@ -103,7 +103,7 @@ class Router:
 						self.model = aux.model
 						r.close()
 						return 1
-		r.close()
+					r.close()
 		return 0
 
 	# When the router object is initialized we check for brand/model
