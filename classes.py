@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 import sys
 import exploit
 
+
 # definition of the options object
 class Options:
 	single_ip = True
@@ -39,6 +40,7 @@ class Router:
 	found = False
 	__is_linksys = False
 	__ssl = False
+
 	# This function check if the given port is or not open
 	def __is_open (self, port):
 		s = socket.socket()
@@ -72,7 +74,7 @@ class Router:
 					url_to_test = prot + self.ip + ':' + port
 					r = requests.get(url_to_test, verify = False, timeout = 5)
 				except requests.exceptions.RequestException as e:
-					aux.ex_print('error','DEBUG: Error in request',1)
+					aux.ex_print('error', 'DEBUG: Error in request', 1)
 					pass
 				else:
 					self.body = BeautifulSoup(r.text, 'lxml')
@@ -89,15 +91,19 @@ class Router:
 						aux.ex_print('positive', '\t[+] Found Brand/Model : ' + self.model, '1')
 						aux.ex_print('action', '[*] Check default creds ...', '1')
 						if exploit.login_act(self) == 1:
+							r.close()
 							return 1
 						else:
 							aux.ex_print('action', '[*] Search for exploit ...', '1')
 							exploit.exploit_act(self)
+							r.close()
 						return 1
 					elif aux.is_dlink(self.body):
 						self.dlink = True
 						self.model = aux.model
+						r.close()
 						return 1
+		r.close()
 		return 0
 
 	# When the router object is initialized we check for brand/model
