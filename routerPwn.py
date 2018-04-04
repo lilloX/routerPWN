@@ -23,43 +23,43 @@ args = parser.parse_args()
 opt = classes.Options
 
 if args.input_ip:
-	opt.single_ip = True
-	opt.list_mode = False
-	opt.ip = args.input_ip
+    opt.single_ip = True
+    opt.list_mode = False
+    opt.ip = args.input_ip
 
 if args.input_file:
-	opt.single_ip = False
-	opt.list_mode = True
-	opt.list_file = args.input_file
+    opt.single_ip = False
+    opt.list_mode = True
+    opt.list_file = args.input_file
 
 if args.output_file:
-	opt.o_file = True
-	opt.o_file_name = args.output_file
+    opt.o_file = True
+    opt.o_file_name = args.output_file
 
 aux.banner(__version__)
 if opt.single_ip:
-	router = classes.Router(opt)
-	del router
+    router = classes.Router(opt)
+    del router
 else:
-	i = 0
-	with open(opt.list_file, 'r') as ip_list:
-		for line in ip_list:
-			i += 1
-			line = line.replace("\n", "")
-			opt.ip = line
-			aux.ex_print("info", "Processing IP number " + str(i) + " of " + str(aux.file_len(opt.list_file)), 1)
-			router = classes.Router(opt)
-			router.open_ports = []
-			# Write to outfile the results even the router is not exploitable
-			if opt.o_file:
-				output = open(opt.o_file_name, 'a')
-				if router.vulnerable:
-					output.writelines(router.model + ',' + router.ip + ',' + router.port + ',' + str(
-							router.vulnerable) + ',' + router.exploit + ',' + router.username + ',' + router.password + '\n')
-				else:
-					if router.model != '':
-						output.writelines(
-								router.model + ',' + router.ip + ',' + router.port + ',' + router.exploit + '\n')
-			del router
-	output.close()
-	ip_list.close()
+    i = 0
+    with open(opt.list_file, 'r') as ip_list:
+        for line in ip_list:
+            i += 1
+            line = line.replace("\n", "")
+            opt.ip = line
+            aux.ex_print("info", "Processing IP number " + str(i) + " of " + str(aux.file_len(opt.list_file)), 1)
+            router = classes.Router(opt)
+            router.open_ports = []
+            # Write to outfile the results even the router is not exploitable
+            if opt.o_file:
+                output = open(opt.o_file_name, 'a')
+                if router.vulnerable:
+                    output.writelines(router.model + ',' + router.ip + ',' + router.port + ',' + str(
+                            router.vulnerable) + ',' + router.exploit + ',' + router.username + ',' + router.password + '\n')
+                else:
+                    if router.model != '':
+                        output.writelines(
+                                router.model + ',' + router.ip + ',' + router.port + ',' + router.exploit + '\n')
+            del router
+    output.close()
+    ip_list.close()
