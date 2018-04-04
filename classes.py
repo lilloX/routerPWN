@@ -114,4 +114,4 @@ class Router:
         aux.ex_print('action', '[*] Try to detect web server on default ports...', 1)
         if self.__check_webserver(opt) == 0:
             aux.ex_print('error', '\t[-] Brand/Model not found! ', '1')
-        return self
+        
