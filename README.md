@@ -2,6 +2,8 @@
 
 A tool for exploiting home routers. Needs python 3. Released under GPL v3 license.
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f42824ff82de4f56851b67c1a5044cf1)](https://www.codacy.com/app/lilloX/routerPWN?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=lilloX/routerPWN&amp;utm_campaign=Badge_Grade)
+
 ### Disclaimer:
 This software is designed **only** for testing purposes and POC. It contains no 0-day, only vulnerabilities/exploits  that have been submitted to vendors and fixed.
 
